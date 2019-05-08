@@ -2,26 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecentlyUsedList<T> {
-    private List<T> newList; //10elements
+    private final List<T> newList; //10elements
 
 
-    public RecentlyUsedList(T[] objects) {
+    public RecentlyUsedList(T objects) {
         newList = new ArrayList<T>();
-        T[] newObjectsHolder;
-        newObjectsHolder = objects;
-        for (T element:
-             newObjectsHolder) {
-            newList.add(element);
-        }
+
+        newList.add(objects);
     }
 
-    public List<T> getNewList() {
+    public List<T> getList() {
         return newList;
     }
 
     public void add(T object){
         if(newList.size() >= 10 && checkIfInTheList(object)){
-            newList.remove(1);
+            newList.remove(9);
             newList.add(1, object);
         }else newList.add(1, object);
     }
@@ -29,7 +25,7 @@ public class RecentlyUsedList<T> {
     private boolean checkIfInTheList(T object){
         for (T element:
                 newList) {
-            if(object.equals(element)){return false}
+            if(object.equals(element)){return false;}
         }
         return true;
     }
